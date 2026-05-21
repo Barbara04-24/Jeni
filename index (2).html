@@ -1,22 +1,150 @@
 <!DOCTYPE html>
 <html lang="id">
-    <p align="center">
-  <video src="https://github.com/user-attachments/assets/c3115a14-e934-497a-b562-7c4a5dedacc4" width="70%" controls></video>
-</p>
-<video class="bg-video" autoplay muted loop playsinline id="bgVideo">
-        <source src="video-estetik.mp4" type="video/mp4">
-        Browser Anda tidak mendukung tag video.
-    </video>
 <head>
-<script>(function(s){s.dataset.zone='11032856',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIDEO VIRAL</title>
-    <meta name="monetag" content="c9a7d462b38156e04ab3e3336c564b7b">
-    <video class="bg-video" autoplay muted loop playsinline id="bgVideo">
-        <source src="video-estetik.mp4" type="video/mp4">
-        Browser Anda tidak mendukung tag video.
-    </video>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estetik Video Web</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins', sans-serif;
+    }
+
+    body{
+      overflow:hidden;
+      background:black;
+      color:white;
+    }
+
+    .hero{
+      position:relative;
+      width:100%;
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      overflow:hidden;
+    }
+
+    /* VIDEO */
+    .hero video{
+      position:absolute;
+      top:50%;
+      left:50%;
+      min-width:100%;
+      min-height:100%;
+      transform:translate(-50%, -50%);
+      object-fit:cover;
+      filter:brightness(0.5);
+    }
+
+    /* OVERLAY */
+    .overlay{
+      position:absolute;
+      width:100%;
+      height:100%;
+      background:linear-gradient(
+        to top,
+        rgba(0,0,0,0.7),
+        rgba(0,0,0,0.2)
+      );
+    }
+
+    /* CONTENT */
+    .content{
+      position:relative;
+      z-index:2;
+      text-align:center;
+      animation:fade 2s ease;
+      padding:20px;
+    }
+
+    .content h1{
+      font-size:4rem;
+      font-weight:700;
+      background:linear-gradient(90deg,#fff,#c084fc);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      margin-bottom:10px;
+    }
+
+    .content p{
+      font-size:1.2rem;
+      color:rgba(255,255,255,0.8);
+      margin-bottom:30px;
+    }
+
+    /* BUTTON */
+    .btn{
+      padding:14px 35px;
+      border-radius:50px;
+      text-decoration:none;
+      color:white;
+      background:rgba(255,255,255,0.1);
+      border:1px solid rgba(255,255,255,0.2);
+      backdrop-filter:blur(10px);
+      transition:0.3s;
+      font-weight:600;
+    }
+
+    .btn:hover{
+      background:#c084fc;
+      transform:scale(1.05);
+      box-shadow:0 0 20px rgba(192,132,252,0.7);
+    }
+
+    @keyframes fade{
+      from{
+        opacity:0;
+        transform:translateY(20px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    @media(max-width:768px){
+      .content h1{
+        font-size:2.5rem;
+      }
+
+      .content p{
+        font-size:1rem;
+      }
+    }
+
+  </style>
 </head>
- <script src="https://quge5.com/88/tag.min.js" data-zone="241194" async data-cfasync="false"></script>
 <body>
+
+  <section class="hero">
+
+  <https://github.com/user-attachments/assets/34c7bfb2-44cc-40e6-a2e7-17453fc90af1>
+    <video autoplay muted loop playsinline>
+      <source src="video.mp4" type="video/mp4">
+    </video>
+
+    <div class="overlay"></div>
+
+    <div class="content">
+      <h1>Dreamy Visual</h1>
+      <p>Website video estetik dengan nuansa cinematic modern</p>
+
+      <a href="#" class="btn">
+        Explore
+      </a>
+    </div>
+
+  </section>
+
+</body>
+</html>
