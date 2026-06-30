@@ -2,23 +2,350 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Mobile Video Player</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIDEY VIRAL - Tonton Video Paling Hits</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome untuk Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #0b0c10;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Container khusus HP */
+        .phone-container {
+            width: 100%;
+            max-width: 480px;
+            height: 100vh;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.2);
+            overflow: hidden;
+        }
+
+        /* Header */
+        header {
+            padding: 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 10;
+        }
+
+        header h1 {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 0px 10px rgba(0, 242, 254, 0.5);
+        }
+
+        header p {
+            font-size: 11px;
+            color: #a0aec0;
+            margin-top: 2px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Area Video */
+        .video-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            position: relative;
+        }
+
+        .video-card {
+            width: 100%;
+            height: 85%;
+            background: #000;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border: 2px solid rgba(0, 242, 254, 0.3);
+            position: relative;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Overlay Tombol Play/Pause Besar */
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+
+        .play-overlay i {
+            font-size: 50px;
+            color: rgba(255, 255, 255, 0.8);
+            opacity: 0;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .video-card:hover .play-overlay i {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* Tombol Interaksi Kanan (Ala TikTok) */
+        .interaction-bar {
+            position: absolute;
+            right: 25px;
+            bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            z-index: 5;
+        }
+
+        .icon-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .icon-btn:bottom-0 {
+            margin-bottom: 5px;
+        }
+
+        .icon-group {
+            text-align: center;
+        }
+
+        .icon-group span {
+            font-size: 11px;
+            display: block;
+            margin-top: 4px;
+            color: #e2e8f0;
+        }
+
+        .icon-btn.like-active {
+            color: #ff4757;
+            background: rgba(255, 71, 87, 0.2);
+            border-color: #ff4757;
+            animation: bounce 0.3s ease;
+        }
+
+        /* Footer / Caption */
+        .video-caption {
+            position: absolute;
+            left: 25px;
+            bottom: 35px;
+            max-width: 70%;
+            z-index: 5;
+        }
+
+        .video-caption h3 {
+            font-size: 15px;
+            color: #00f2fe;
+            margin-bottom: 5px;
+        }
+
+        .video-caption p {
+            font-size: 13px;
+            color: #e2e8f0;
+            line-height: 1.4;
+        }
+
+        /* CTA Button (Tombol Aksi Bawah) */
+        .cta-container {
+            padding: 15px 20px 25px 20px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 10;
+        }
+
+        .cta-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            color: #000;
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 15px;
+            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-btn:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 8px rgba(0, 242, 254, 0.2);
+        }
+
+        /* Animasi Like */
+        @keyframes bounce {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+    </style>
 </head>
 <body>
- 
-    <div class="video-container">
-        <video id="player" playsinline controls preload="metadata">
-            <source src="https://github.com/user-attachments/assets/e9f0092a-5902-4854-82f8-1e467f4338f3" type="video/mp4">
-            Browser kamu tidak mendukung pemutar video ini.
-        </video>
 
-        <div id="playBtn" class="play-overlay">
-            <div class="play-icon">▶</div>
+    <div class="phone-container">
+        <!-- HEADER SITUS -->
+        <header>
+            <h1>VIDEY VIRAL</h1>
+            <p>Trending & Viral Video Hub</p>
+        </header>
+
+        <!-- AREA UTAMA VIDEO -->
+        <div class="video-wrapper">
+            <div class="video-card">
+                <!-- GANTI URL DI BAWAH INI DENGAN LINK VIDEO KAMU -->
+                <video id="viralVideo" loop playsinline>
+                    <source src="https://github.com/user-attachments/assets/e9f0092a-5902-4854-82f8-1e467f4338f3" type="video/mp4">
+                    Browser kamu tidak mendukung video html5.
+                </video>
+
+                <!-- Tombol Overlay tengah video -->
+                <div class="play-overlay" onclick="togglePlay()">
+                    <i id="playIcon" class="fas fa-play"></i>
+                </div>
+
+                <!-- Caption Video -->
+                <div class="video-caption">
+                    <h3>@videy_viral.id</h3>
+                    <p>Efek lampu neonnya keren parah! 🔥 Jangan lupa share ke temen kalian ya! #viral #fyp #trending</p>
+                </div>
+
+                <!-- Tombol Interaksi Samping -->
+                <div class="interaction-bar">
+                    <div class="icon-group">
+                        <button class="icon-btn" id="likeBtn" onclick="toggleLike()">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                        <span id="likeCount">12.5K</span>
+                    </div>
+                    
+                    <div class="icon-group">
+                        <button class="icon-btn" onclick="alert('Kolom komentar dinonaktifkan')">
+                            <i class="fas fa-comment-dots"></i>
+                        </button>
+                        <span>432</span>
+                    </div>
+
+                    <div class="icon-group">
+                        <button class="icon-btn" onclick="shareVideo()">
+                            <i class="fas fa-share"></i>
+                        </button>
+                        <span>Share</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOMBOL AKSI BAWAH (CTA) -->
+        <div class="cta-container">
+            <a href="#" class="cta-btn" onclick="alert('Membuka video viral lainnya...')">
+                <i class="fas fa-bolt"></i> Tonton Video Viral Lainnya
+            </a>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- JAVASCRIPT UNTUK FITUR INTERAKTIF -->
+    <script>
+        const video = document.getElementById('viralVideo');
+        const playIcon = document.getElementById('playIcon');
+        const likeBtn = document.getElementById('likeBtn');
+        const likeCount = document.getElementById('likeCount');
+        let isLiked = false;
+
+        // Fungsi Play / Pause saat video di ketuk
+        function togglePlay() {
+            if (video.paused) {
+                video.play();
+                playIcon.className = "fas fa-pause";
+                // Hilangkan icon perlahan setelah video jalan
+                setTimeout(() => { playIcon.style.opacity = "0"; }, 500);
+            } else {
+                video.pause();
+                playIcon.className = "fas fa-play";
+                playIcon.style.opacity = "1";
+            }
+        }
+
+        // Munculkan kembali icon jika hover/sentuh ulang
+        video.parentElement.addEventListener('mouseenter', () => {
+            playIcon.style.opacity = "1";
+        });
+
+        // Fitur Tombol Like
+        function toggleLike() {
+            isLiked = !isLiked;
+            if (isLiked) {
+                likeBtn.classList.add('like-active');
+                likeCount.innerText = "12.6K";
+            } else {
+                likeBtn.classList.remove('like-active');
+                likeCount.innerText = "12.5K";
+            }
+        }
+
+        // Fitur Tombol Share sederhana
+        function shareVideo() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'VIDEY VIRAL',
+                    text: 'Cek video viral keren ini!',
+                    url: window.location.href,
+                }).catch(console.error);
+            } else {
+                alert('Link video berhasil disalin ke clipboard!');
+            }
+        }
+    </script>
 </body>
 </html>
