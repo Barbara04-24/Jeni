@@ -1,11 +1,9 @@
-
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Live Stream Interface</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Live Stream - Barbara Mobile</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -14,7 +12,7 @@
     <div class="phone-container">
         
         <div class="video-background">
-            <video id="myVideo" loop playsinline>
+            <video id="myVideo" loop playsinline preload="metadata" loading="lazy">
                 <source src="https://github.com/user-attachments/assets/4a6c8937-fdea-4ee0-94c7-49b9ad2f71c5" type="video/mp4">
             </video>
             <div id="playBtn" class="center-play-btn">▶</div>
@@ -48,8 +46,21 @@
                 </div>
             </div>
 
-          
-            
+            <div class="popup-notification">
+                <div class="popup-header">
+                    <span class="popup-title">Wild Bandito x1000</span>
+                    <span class="popup-time">now</span>
+                </div>
+                <p class="popup-body">Jackpot will x 1000 ! Langsung WD !</p>
+                <div class="popup-buttons">
+                    <button class="btn-like">❤️ LIKE</button>
+                    <button class="btn-reply">💬 REPLY</button>
+                </div>
+                
+                <div class="location-badge">
+                    📍 Surabaya
+                </div>
+            </div>
 
             <footer class="bottom-bar">
                 <div class="comment-input-container">
@@ -61,6 +72,7 @@
 
         </div>
     </div>
-<script src="script.js"></script>
+
+    <script src="script.js"></script>
 </body>
 </html>
