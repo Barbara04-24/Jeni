@@ -305,99 +305,60 @@ body {
     cursor: pointer;
 }
 
-/*OPTIMASI KHUSUS TAMPILAN HP / MOBILE (BREAKPOINT: 768px atau lebih kecil)*/
+/* ==========================================================================
+   PERBAIKAN UTAMA: AUTO-FIT LAYAR HP (ANTI-TERPOTONG)
+   ========================================================================== */
+
+.phone-container {
+    position: relative;
+    width: 100%;
+    max-width: 450px; 
+    /* Menggunakan dvh (Dynamic Viewport Height) agar pas dengan tinggi layar asli HP, 
+       tidak terpotong oleh address bar browser (Chrome/Safari) */
+    height: 100vh;
+    height: 100dvh; 
+    background-color: #000;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   KONDISI SAAT WEB DIBUKA LANGSUNG LEWAT HP
+   ========================================================================== */
 @media (max-width: 768px) {
-    
-    body {
-        overflow-y: auto; /* Izinkan scroll ke bawah di HP */
-        overflow-x: hidden;
-    }
-
-    /* Mengubah arah layout utama dari samping ke atas-bawah */
-    .app-container {
-        flex-direction: column;
-        height: auto;
-        padding-bottom: 90px; /* Jarak bawah agar konten tidak tertutup navbar bawah */
-    }
-
-    /* AREA UTAMA (KANAN JADI ATAS) */
-    .main-content {
-        padding: 20px 15px;
-        width: 100%;
-        justify-content: flex-start;
-    }
-
-    /* LOGO / BRANDING DI HP */
-    .brand-logo {
-        position: static; /* Tidak melayang lagi */
-        text-align: center;
-        margin-bottom: 25px;
-        font-size: 28px; /* Sedikit lebih kecil agar pas di layar HP */
-    }
-
-    /* BINGKAI VIDEO GLASSMORPHISM DI HP */
-    .video-glass-frame {
-        padding: 8px; /* Lebih tipis agar area video maksimal */
-        border-radius: 16px;
-        width: 100%;
+    .phone-container {
         max-width: 100%;
+        height: 100vh;
+        height: 100dvh; /* Memaksa tinggi pas 100% layar HP */
+        border-radius: 0; /* Menghilangkan kelengkungan frame saat di HP */
     }
 
-    .video-glass-frame::before {
-        border-radius: 16px; /* Menyesuaikan kelengkungan border menyala */
+    /* Mengoptimalkan konten overlay agar mengikuti area aman HP (Safe Area) */
+    .overlay-content {
+        padding-top: calc(15px + env(safe-area-inset-top));   /* Antisipasi Poni/Notch HP */
+        padding-bottom: calc(15px + env(safe-area-inset-bottom)); /* Antisipasi Home Indicator iPhone/Android */
+        padding-left: 15px;
+        padding-right: 15px;
     }
 
-    .video-wrapper {
-        border-radius: 10px;
+    /* Menyesuaikan ukuran teks popup di layar HP yang lebih kecil */
+    .popup-notification {
+        padding: 15px;
+        border-radius: 20px;
     }
 
-    /* JUDUL DI BAWAH VIDEO DI HP */
-    .video-title {
-        margin-top: 20px;
-        font-size: 16px; /* Ukuran teks proporsional untuk HP */
-        text-align: center;
-        padding: 0 10px;
-        line-height: 1.4;
+    .popup-header {
+        font-size: 14px;
     }
 
-    /* MENGUBAH SIDEBAR KIRI MENJADI NAVBAR BAWAH (BOTTOM NAV) ALA APLIKASI HP 
-    */
-    .sidebar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 70px; /* Tinggi navbar bawah */
-        flex-direction: row; /* Berjejer ke samping, bukan ke bawah */
-        justify-content: space-around; /* Jarak antar menu rata */
-        align-items: center;
-        gap: 0;
-        background: rgba(13, 19, 26, 0.8); /* Efek gelap transparan */
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-right: none;
-        border-top: 1px solid rgba(255, 255, 255, 0.08); /* Garis pembatas di atas menu */
-        box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
-        border-radius: 15px 15px 0 0; /* Lengkungan estetik di bagian atas navbar */
+    .popup-body {
+        font-size: 12px;
     }
 
-    /* Ukuran icon dan teks menu di HP */
-    .nav-item {
-        flex: 1;
-        padding: 10px 0;
-    }
-
-    .nav-item .icon {
-        font-size: 20px; /* Icon sedikit diperkecil */
-        margin-bottom: 2px;
-    }
-
-    .nav-item span {
-        font-size: 10px; /* Teks menu disesuaikan untuk layar kecil */
-    }
-
-    /* Sembunyikan dekorasi bintang di HP agar tidak mengganggu pandangan */
-    .sparkle-deco {
-        display: none;
+    /* Jarak tombol aksi kanan agar tidak terlalu mepet ke pinggir layar HP */
+    .right-actions {
+        right: 15px;
+        gap: 15px;
     }
 }
