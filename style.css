@@ -305,9 +305,7 @@ body {
     cursor: pointer;
 }
 
-/* ==========================================================================
-   OPTIMASI KHUSUS TAMPILAN HP / MOBILE (BREAKPOINT: 768px atau lebih kecil)
-   ========================================================================== */
+/*OPTIMASI KHUSUS TAMPILAN HP / MOBILE (BREAKPOINT: 768px atau lebih kecil)*/
 @media (max-width: 768px) {
     
     body {
