@@ -31,7 +31,9 @@ body {
 video {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Video tidak akan terpotong, proporsi asli tetap terjaga */
+    /* KUNCI UTAMA: Menjaga bentuk asli video tetap utuh. 
+       Jika ada ruang kosong di atas/bawah, akan otomatis diisi warna hitam */
+    object-fit: contain; 
     z-index: 1;
 }
 
