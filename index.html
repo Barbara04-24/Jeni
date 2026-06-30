@@ -3,57 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Live Stream - Barbara Mobile</title>
+    <title>Mobile Video Player</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="phone-container">
-        
-        <div class="video-wrapper">
-                    <video controls preload="metadata" loading="lazy">
-                        <source src="https://github.com/user-attachments/assets/e9f0092a-5902-4854-82f8-1e467f4338f3" type="video/mp4">
-                        Browser kamu tidak mendukung pemutar video ini.
-                    </video>
-        </div>
+    <div class="video-container">
+        <video id="player" playsinline controls preload="metadata">
+            <source src="https://github.com/user-attachments/assets/e9f0092a-5902-4854-82f8-1e467f4338f3" type="video/mp4">
+            Browser kamu tidak mendukung pemutar video ini.
+        </video>
 
-        <div class="overlay-content">
-            
-            <header class="live-header">
-                <div class="left-header">
-                    <span class="badge-live">● LIVE</span>
-                    <span class="streamer-name">💋 Midnig...</span>
-                </div>
-                <div class="right-header">
-                    <div class="viewer-count">
-                        <span class="eye-icon">👁️</span> 2.7K <span class="text-light">menonton</span>
-                    </div>
-                </div>
-            </header>
-
-            <div class="likes-counter">
-                ❤️ 9.8K
-            </div>
-
-            <div class="right-actions">
-                <div class="action-item">
-                    <div class="action-icon">🖤</div>
-                    <span>Suka</span>
-                </div>
-                <div class="action-item">
-                    <div class="action-icon">💬</div>
-                </div>
-            </div>
-
-            <footer class="bottom-bar">
-                <div class="comment-input-container">
-                    <span class="emoji-icon">😊</span>
-                    <input type="text" placeholder="Ketik komentar...">
-                    <button class="btn-send">Kirim</button>
-                </div>
-            </footer>
-
+        <div id="playBtn" class="play-overlay">
+            <div class="play-icon">▶</div>
         </div>
     </div>
 
