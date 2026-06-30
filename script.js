@@ -8,3 +8,24 @@ window.addEventListener('DOMContentLoaded', () => {
         radial-gradient(at 0% 0%, rgba(41, 74, 97, 0.4) 0px, transparent 50%),
         radial-gradient(at 100% 100%, rgba(139, 92, 43, 0.25) 0px, transparent 50%),
         url('${bgUrl}')`;
+const video = document.getElementById('myVideo');
+const playBtn = document.getElementById('playBtn');
+
+// Fungsi untuk memutar video dan menyembunyikan tombol
+function playVideo() {
+    video.play();
+    playBtn.classList.add('hidden'); // Menambahkan kelas CSS 'hidden' agar tombol memudar dan hilang
+}
+
+// Jalankan fungsi saat tombol play di-klik
+playBtn.addEventListener('click', playVideo);
+
+// Opsional: Jika pengguna mengklik area videonya langsung, video juga berputar dan tombol hilang
+video.addEventListener('click', () => {
+    if (video.paused) {
+        playVideo();
+    } else {
+        video.pause();
+        playBtn.classList.remove('hidden'); // Memunculkan tombol kembali jika video di-pause
+    }
+});
