@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VIDEY VIRAL - Tonton Video Paling Hits</title>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome untuk Icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -106,20 +104,26 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: rgba(0,0,0,0.2);
+            background: rgba(0,0,0,0.1);
             cursor: pointer;
+            z-index: 4;
         }
 
+        /* PERBAIKAN: Secara default ikon terlihat (opacity 1) */
         .play-overlay i {
-            font-size: 50px;
-            color: rgba(255, 255, 255, 0.8);
-            opacity: 0;
+            font-size: 60px;
+            color: rgba(255, 255, 255, 0.85);
+            opacity: 1;
+            transform: scale(1);
             transition: transform 0.2s, opacity 0.2s;
+            filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.4));
         }
 
-        .video-card:hover .play-overlay i {
-            opacity: 1;
-            transform: scale(1.1);
+        /* PERBAIKAN: Menghapus class hover yang bentrok dengan js */
+        .play-overlay i.hidden {
+            opacity: 0;
+            transform: scale(0.5);
+            pointer-events: none;
         }
 
         /* Tombol Interaksi Kanan (Ala TikTok) */
@@ -150,10 +154,6 @@
             transition: all 0.3s ease;
         }
 
-        .icon-btn:bottom-0 {
-            margin-bottom: 5px;
-        }
-
         .icon-group {
             text-align: center;
         }
@@ -179,6 +179,7 @@
             bottom: 35px;
             max-width: 70%;
             z-index: 5;
+            pointer-events: none; /* Supaya ketukan jari tembus ke play-overlay */
         }
 
         .video-caption h3 {
@@ -235,33 +236,27 @@
 <body>
 
     <div class="phone-container">
-        <!-- HEADER SITUS -->
         <header>
             <h1>VIDEY VIRAL</h1>
             <p>Trending & Viral Video Hub</p>
         </header>
 
-        <!-- AREA UTAMA VIDEO -->
         <div class="video-wrapper">
             <div class="video-card">
-                <!-- GANTI URL DI BAWAH INI DENGAN LINK VIDEO KAMU -->
                 <video id="viralVideo" loop playsinline>
                     <source src="https://github.com/user-attachments/assets/30ed5e48-6a2b-4f00-82c8-e37b5a84d75f" type="video/mp4">
                     Browser kamu tidak mendukung video html5.
                 </video>
 
-                <!-- Tombol Overlay tengah video -->
                 <div class="play-overlay" onclick="togglePlay()">
                     <i id="playIcon" class="fas fa-play"></i>
                 </div>
 
-                <!-- Caption Video -->
                 <div class="video-caption">
-                    <h3>@videy_viral.id</h3>
+                    <h3>VIDEY VIRAL</h3>
                     <p>🔥 Jangan lupa share ke temen kalian ya! #viral #fyp #trending</p>
                 </div>
 
-                <!-- Tombol Interaksi Samping -->
                 <div class="interaction-bar">
                     <div class="icon-group">
                         <button class="icon-btn" id="likeBtn" onclick="toggleLike()">
@@ -287,7 +282,6 @@
             </div>
         </div>
 
-        <!-- TOMBOL AKSI BAWAH (CTA) -->
         <div class="cta-container">
             <a href="#" class="cta-btn" onclick="alert('https://h0tvidey.github.io/EGA2/')">
                 <i class="fas fa-bolt"></i> Tonton Video Viral Lainnya
@@ -295,7 +289,6 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT UNTUK FITUR INTERAKTIF -->
     <script>
         const video = document.getElementById('viralVideo');
         const playIcon = document.getElementById('playIcon');
@@ -303,24 +296,19 @@
         const likeCount = document.getElementById('likeCount');
         let isLiked = false;
 
-        // Fungsi Play / Pause saat video di ketuk
+        // PERBAIKAN: Fungsi Play / Pause logic TikTok
         function togglePlay() {
             if (video.paused) {
                 video.play();
-                playIcon.className = "fas fa-pause";
-                // Hilangkan icon perlahan setelah video jalan
-                setTimeout(() => { playIcon.style.opacity = "0"; }, 500);
+                // Tambahkan class hidden agar ikon mengecil dan menghilang halus
+                playIcon.classList.add('hidden');
             } else {
                 video.pause();
+                // Jika di-pause, ubah ikon jadi play lagi lalu munculkan kembali
                 playIcon.className = "fas fa-play";
-                playIcon.style.opacity = "1";
+                playIcon.classList.remove('hidden');
             }
         }
-
-        // Munculkan kembali icon jika hover/sentuh ulang
-        video.parentElement.addEventListener('mouseenter', () => {
-            playIcon.style.opacity = "1";
-        });
 
         // Fitur Tombol Like
         function toggleLike() {
